@@ -1,0 +1,8 @@
+{
+    "base_ami_id": "ami-00035f41c82244dab",
+    "profile": "xxxxx",
+    "region": "eu-west-1",
+    "instance_type": "m5.large",
+    "vpc_id" : "vpc-xxxxx",
+    "subnet_id" : "subnet-xxxxx"
+}
