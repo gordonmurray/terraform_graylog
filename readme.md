@@ -1,2 +1,2 @@
-# terraform_graylog
-Use Packer and Terraform to create a Graylog cluster
+# Terraform Graylog
+Use Packer to create a Graylog AMI and an Elastic AMI for use in a Graylog cluster
