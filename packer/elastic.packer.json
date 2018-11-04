@@ -31,8 +31,14 @@
         "script": "files/elastic.sh"
     },
     {
+      "destination": "/home/ubuntu/elasticsearch.yml",
+      "source": "files/elasticsearch.yml",
+      "type": "file"
+    },
+    {
       "type": "shell",
       "inline": [
+        "sudo mv /home/ubuntu/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml",
         "sudo systemctl restart elasticsearch"
       ]
     }
