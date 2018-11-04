@@ -6,8 +6,8 @@ sudo apt-get update
 sudo apt install pwgen -y 
 
 # user
-adduser graylog
-usermod -aG sudo graylog
+sudo adduser graylog
+sudo usermod -aG sudo graylog
 
 # install graylog 2.2 
 wget https://packages.graylog2.org/repo/packages/graylog-2.2-repository_latest.deb

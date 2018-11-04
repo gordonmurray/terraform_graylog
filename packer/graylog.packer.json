@@ -24,7 +24,15 @@
     },
     {
       "type": "shell",
+      "script": "files/java.sh"
+    },
+    {
+      "type": "shell",
       "script": "files/mongodb.sh"
-  }
+    },
+    {
+      "type": "shell",
+      "script": "files/graylog.sh"
+    }
   ]
 }
