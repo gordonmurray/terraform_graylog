@@ -1,0 +1,40 @@
+# Install Elasticsearch for Graylog
+# Steps taken from official Graylog documentation at https://docs.graylog.org/en/3.2/pages/installation/os/ubuntu.html
+
+- name: Add signing key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add source repository into sources list.
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main
+    state: present
+    filename: elastic-6.x
+    update_cache: yes
+
+- name: Install Elasticsearch
+  vars:
+    packages:
+      - apt-transport-https
+      - elasticsearch-oss
+  apt:
+    pkg: "{{ packages }}"
+    update_cache: yes
+    state: latest
+
+- name: Copy configuration file
+  copy:
+    src: elasticsearch.yml
+    dest: /etc/elasticsearch/elasticsearch.yml
+
+- name: Create logs folder
+  file:
+    path: /usr/share/elasticsearch/logs/
+    state: directory
+    mode: '0755'
+
+- name: Enable service
+  service:
+    name: elasticsearch
+    enabled: yes

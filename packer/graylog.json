@@ -1,0 +1,50 @@
+{
+    "variables": {
+        "base_ami_id": "ami-04c58523038d79132",
+        "region": "eu-west-1",
+        "instance_type": "m5.large",
+        "vpc_id": "vpc-xxxxxx",
+        "subnet_id": "",
+        "access_key": "",
+        "secret_key": ""
+    },
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "{{user `region`}}",
+            "source_ami": "{{user `base_ami_id`}}",
+            "instance_type": "{{user `instance_type`}}",
+            "access_key": "{{user `access_key`}}",
+            "secret_key": "{{user `secret_key`}}",
+            "force_deregister": "true",
+            "force_delete_snapshot": "true",
+            "ssh_username": "ubuntu",
+            "ami_name": "graylog",
+            "vpc_id": "{{user `vpc_id`}}",
+            "subnet_id": "{{user `subnet_id`}}",
+            "tags": {
+                "Name": "graylog"
+            }
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt update",
+                "sudo apt upgrade -y",
+                "sudo apt install ansible -y"
+            ]
+        },
+        {
+            "type": "ansible-local",
+            "playbook_file": "./ansible/graylog.yml",
+            "role_paths": [
+                "./ansible/roles/elasticsearch",
+                "./ansible/roles/graylog",
+                "./ansible/roles/java",
+                "./ansible/roles/mongodb"
+            ]
+        }
+    ]
+}
